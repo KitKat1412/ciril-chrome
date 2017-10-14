@@ -1,0 +1,24 @@
+{
+  "name": "CIRIL",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "CIRIL Word breakdown",
+  
+  "background": {
+    "scripts": ["ciril-interface.js"]
+  },
+
+  "content_scripts": [
+    {
+		"matches": ["<all_urls>"],
+      "js": ["ciril-chrome.js"]
+    }
+  ],
+  
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+	"contextMenus",
+	"tabs"
+  ]
+}
