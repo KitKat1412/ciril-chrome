@@ -18,20 +18,24 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
 
 function savetext(info,tab)
 {
-	chrome.tabs.create({
-		url: chrome.extension.getURL('popup/popup.html'),
-		active: false
-	}, function(tab) {
-		chrome.windows.create({
-			tabId: tab.id,
-			type: 'popup',
-			focused: true,
-			height: 400,
-			width: 500,
-			left: 500,
-			top: 200
-		})
-	});
+	chrome.runtime.sendNativeMessage('edu.truman.ciril', {'word': seltext}, function(msg) {
+		console.log(msg);
+		chrome.tabs.create({
+			url: chrome.extension.getURL('popup/popup.html'),
+			active: false
+		}, function(tab) {
+			chrome.windows.create({
+				tabId: tab.id,
+				type: 'popup',
+				focused: true,
+				height: 400,
+				width: 500,
+				left: 500,
+				top: 200
+			})
+			chrome.tabs.sendMessage(tab.id, msg);
+		});
+	})
 }
 
 var contexts = ['selection'];

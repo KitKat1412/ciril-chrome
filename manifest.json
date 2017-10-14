@@ -18,7 +18,8 @@
   "permissions": [
     "http://*/*",
     "https://*/*",
-	"contextMenus",
-	"tabs"
+    "contextMenus",
+    "tabs",
+    "nativeMessaging"
   ]
 }
