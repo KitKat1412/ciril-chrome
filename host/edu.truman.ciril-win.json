@@ -1,0 +1,9 @@
+{
+	"name": "edu.truman.ciril",
+	"description": "CIRIL Native Messaging Interface",
+	"path": "ciril-interface-host.bat",
+	"type": "stdio",
+	"allowed_origins": [
+		"chrome-extension://gdegaoahedinjgnkgciaamnhgnaiafbd/"
+	]
+}
