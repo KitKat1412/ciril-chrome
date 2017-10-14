@@ -25,7 +25,11 @@ function savetext(info,tab)
 		chrome.windows.create({
 			tabId: tab.id,
 			type: 'popup',
-			focused: true
+			focused: true,
+			height: 400,
+			width: 500,
+			left: 500,
+			top: 200
 		})
 	});
 }
