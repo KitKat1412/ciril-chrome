@@ -1,8 +1,14 @@
 {
-  "name": "CIRIL",
+  "name": "Affixr",
   "version": "1.0",
   "manifest_version": 2,
-  "description": "CIRIL Word breakdown",
+  "description": "Affixr word breakdown",
+
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
   
   "background": {
     "scripts": ["ciril-interface.js"]

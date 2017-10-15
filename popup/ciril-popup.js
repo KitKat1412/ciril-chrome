@@ -1,41 +1,20 @@
-chrome.runtime.onMessage.addListener(function(msg) {
-	console.log(msg); //msg will be a JSON array of Word objects
-});
+var breakdown;
+$(function() {
+	chrome.extension.sendRequest({'message': 'getWord'}, function(msg) {
+		console.log(msg);
+		breakdown = msg;
+		index = breakdown.length - 2;
+		if(breakdown[0].definition == null) {
+			$("#affix").text("Sorry!");
+			$("#adef").text("No definition found for " + breakdown[0].word);
+			return;
+		}
+		setup();
+	});
+})
+var index = 0;
 
-var pt1 = {
-	"word": "dis",
-	"definition": "not, opposite of",
-	"type": "PREFIX"
-};
-
-var pt2 = {
-	"word": "en",
-	"definition": "cause to",
-	"type": "PREFIX"
-};
-
-var pt3 = {
-	"word": "ed",
-	"definition": "past-tense verbs",
-	"type": "SUFFIX"
-};
-
-var pt4 = {
-	"word": "gage",
-	"definition": "n. 1 pledge; thing deposited as security. 2 symbol of a challenge to fight, esp. A glove thrown down. [germanic: related to *wed, *wage]",
-	"type": "BASE"
-};
-
-var pt5 = {
-	"word": "disengaged",
-	"type": "ORG"
-};
-
-var breakdown = [pt1, pt2, pt3, pt4, pt5];
-
-$(document).ready(function() {
-	$(".banner").css("pointer-events", "none");
-	var index = 0;
+function setup() {
 	$('#ogword').contents().first()[0].textContent=breakdown[breakdown.length - 1].word;
 	var hidden = true;
 	$('.drop').click(function() {
@@ -66,24 +45,28 @@ $(document).ready(function() {
 	$('#affix').contents().first()[0].textContent=breakdown[index].word;
 	$('#adef').contents().first()[0].textContent=breakdown[index].definition;
 
-	// $('.drop').click(function() {
-	// 	if(hidden){
-	// 		$('.drop').animate({
-	// 			bottom: '-=60'
-	// 		  }, 500, function() {
-	// 			// Animation complete.
-	// 		  });
-	// 		  hidden = false;
-	// 	} else {
-	// 		$('.drop').animate({
-	// 			bottom: '+=60'
-	// 		  }, 500, function() {
-	// 			// Animation complete.
-	// 		  });
-	// 		  hidden = true;
-	// 	}
-	// 	console.log("clicked");
-	// });
+	console.log($('.fa-angle-double-left'));
+	console.log($('.fa-angle-double-right'));
+	$('.fa-angle-double-left').click(moveLeft);
+
+	$('.fa-angle-double-right').click(moveRight);
+}
 
 
-});
+function moveLeft() {
+	index--;
+	if(index < 0) {
+		index = breakdown.length - 1;
+	}	
+	$('#affix').contents().first()[0].textContent=breakdown[index].word;
+	$('#adef').contents().first()[0].textContent=breakdown[index].definition;
+}
+
+function moveRight() {
+	index++;
+	if(index >= breakdown.length - 1) {
+		index = 0;
+	}	
+	$('#affix').contents().first()[0].textContent=breakdown[index].word;
+	$('#adef').contents().first()[0].textContent=breakdown[index].definition;
+}

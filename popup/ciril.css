@@ -72,22 +72,22 @@ h1 {
 }
 
 .fa-angle-double-right {
-    margin-left: 420px;
-    margin-top: 12.5px;
+    margin-left: 430px;
+    margin-top: 12px;
     position: absolute;
-    z-index: -2;
+    z-index: 10000000;
 }
 
 .fa-angle-double-left {
-    margin-left: 50px;
+    margin-left: 0px;
     margin-top: 13px;
     position: absolute;
-    z-index: -2;
+    z-index: 10000000;
 }
 
 .part {
     position: absolute;
-    z-index: -2;
+    z-index: -3;
 }
 
 .pulldown {
@@ -141,5 +141,5 @@ i, .part {
 
 #cred {
     font-size: 0.79em;
-    padding-top: 70px;
+    padding-top: 10px;
 }
